@@ -5,10 +5,10 @@ import Icon from '@mui/material/Icon';
 export default function App() {
   return (
     <>
-       <Button variant="contained" color="primary" disableElevation>
-         Hello World
+       <Button variant="contained" color="secondary" startIcon={<Icon>delete</Icon>}>
+         Delete
        </Button>
-       <Icon>star</Icon>
+       <Icon color="primary">room</Icon>
     </>
   );
 }
