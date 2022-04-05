@@ -95,7 +95,7 @@ export default function NavBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Cart cant={20} /> 
+            <Cart /> 
           </Box>
         </Toolbar>
       </Container>
