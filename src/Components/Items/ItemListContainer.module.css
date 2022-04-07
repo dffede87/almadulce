@@ -1,0 +1,4 @@
+.containerItems {
+    display: flex;
+    justify-content: space-around;
+}
