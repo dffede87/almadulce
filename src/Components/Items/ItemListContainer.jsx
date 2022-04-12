@@ -6,11 +6,15 @@ import s from "./ItemListContainer.module.css";
 export default function ItemListContainer({ titulo }) {
 
   const [items, setItems] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     traerProductos()
     .then(resultado => setItems(resultado))
     .catch(error => console.log(error))
+    .finally(() => {
+      setLoading(false)
+    })
   }, [items])
   
 
@@ -18,7 +22,7 @@ export default function ItemListContainer({ titulo }) {
     <>
        <h1>{titulo}</h1>
        <div className={s.containerItems} >
-          <ItemList productos={items} />
+          {loading ? <h2>Cargando productos...</h2> : <ItemList productos={items} />}
        </div>
     </>
   );
