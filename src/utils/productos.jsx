@@ -4,7 +4,8 @@ export const productos = [
         nombre: 'Producto 1',
         descripcion: 'Esta es la descripción del producto nro. 1',
         precio: 350,
-        stock: 10,
+        stock: 15,
+        categoria: 'tartas',
         imagen: 'https://picsum.photos/200/300/?random'
     },
 
@@ -14,6 +15,7 @@ export const productos = [
         descripcion: 'Esta es la descripción del producto nro. 2',
         precio: 500,
         stock: 5,
+        categoria: 'tortas',
         imagen: 'https://picsum.photos/200/300/?random'
     },
 
@@ -23,31 +25,27 @@ export const productos = [
         descripcion: 'Esta es la descripción del producto nro. 3',
         precio: 400,
         stock: 8,
+        categoria: 'pasteleria',
         imagen: 'https://picsum.photos/200/300/?random'
     }
 ]
 
-export const producto = {
-    id: 1,
-    nombre: 'Producto 1',
-    descripcion: 'Esta es la descripción del producto nro. 1',
-    precio: 350,
-    stock: 10,
-    imagen: 'https://picsum.photos/200/300/?random'
-}
-
-export const traerProductos = () => {
+export const traerProductos = (categoryId) => {
     return new Promise((resolve, reject) => {
+        const productosFiltrados = productos.filter(
+            (producto) => producto.categoria === categoryId
+        )
         setTimeout(() => {
-            resolve(productos);
-        }, 2000)
+            categoryId ? resolve(productosFiltrados) : resolve(productos)
+        }, 1000)
     })
 }
 
-export const traerProducto = () => {
+export const traerProducto = (id) => {
     return new Promise((resolve, reject) => {
+        const productoElegido = productos.find((producto) => producto.id === Number(id))
         setTimeout(() => {
-            resolve(producto);
-        }, 2000)
+            resolve(productoElegido);
+        }, 500)
     })
 }

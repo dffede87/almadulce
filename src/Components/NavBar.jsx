@@ -11,8 +11,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Cart from './Cart.jsx';
 import LogoHeader from '../assets/img/logo-header.png';
-
-const pages = ['Tortas', 'Tartas', 'Mesas Dulces', 'Catering'];
+import { Link } from 'react-router-dom';
 
 export default function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,7 +34,9 @@ export default function NavBar() {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            <img src={LogoHeader} alt="Logo" height="52px" />
+            <Link to="/">
+              <img src={LogoHeader} alt="Logo" height="52px" />
+            </Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -67,11 +68,21 @@ export default function NavBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to="category/tartas">Tartas</Link>
+                  </Typography>
                 </MenuItem>
-              ))}
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to="category/tortas">Tortas</Link>
+                  </Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link to="category/pasteleria">Pastelería</Link>
+                  </Typography>
+                </MenuItem>
             </Menu>
           </Box>
           <Typography
@@ -83,15 +94,30 @@ export default function NavBar() {
             <img src={LogoHeader} alt="Logo" height="45px" />
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            <Link to="/category/tartas" style={{textDecoration: 'none'}}>
               <Button
-                key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                Tartas
               </Button>
-            ))}
+            </Link>
+            <Link to="/category/tortas" style={{textDecoration: 'none'}}>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Tortas
+              </Button>
+            </Link>
+            <Link to="/category/pasteleria" style={{textDecoration: 'none'}}>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Pastelería
+              </Button>
+            </Link>    
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>

@@ -3,16 +3,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions } from '@mui/material';
-import ItemCount from './ItemCount';
+import { Link } from 'react-router-dom';
+import { Button, CardActionArea, CardActions } from '@mui/material';
 
-export default function Item({id, nombre, precio, imagen}) {
-
-    function onAdd(cant) {
-        if (cant > 0) {
-          alert(cant);
-        }
-    }  
+export default function Item({id, nombre, precio, categoria, imagen}) { 
 
   return (
     <>
@@ -28,13 +22,20 @@ export default function Item({id, nombre, precio, imagen}) {
           <Typography gutterBottom variant="h5" component="div">
             {nombre}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography gutterBottom variant="body2" color="text.primary">
             ${precio}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            #{categoria}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <ItemCount stock={10} initial={1} onAdd={onAdd} />
+        <Link to={`/item/${id}`} style={{textDecoration: 'none'}}>
+          <Button variant="contained" color="primary">
+            Ver detalles
+          </Button>
+        </Link>
       </CardActions>
     </Card>
     </>

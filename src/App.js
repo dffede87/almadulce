@@ -2,13 +2,21 @@ import React from "react";
 import NavBar from "./Components/NavBar";
 import ItemListContainer from "./Components/Items/ItemListContainer";
 import ItemDetailContainer from "./Components/Items/ItemDetailContainer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PageNotFound from "./Components/PageNotFound";
 
 export default function App() {
   return (
     <>
-      <NavBar />
-      <ItemListContainer titulo={"Bienvenido/a a nuestra tienda online"} />
-      <ItemDetailContainer />
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route exact path="/" element={<ItemListContainer titulo={"Bienvenido/a a nuestra tienda online"} />} />
+          <Route exact path="/category/:categoryId" element={<ItemListContainer titulo={"Bienvenido/a a nuestra tienda online"} />} />
+          <Route exact path="/item/:id" element={<ItemDetailContainer />} />
+          <Route exact path="*" element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
