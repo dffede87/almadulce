@@ -1,10 +1,9 @@
 import React from "react";
-import Icon from '@mui/material/Icon';
 
-export default function Cart({ cant }) {
+export default function Cart() {
   return (
     <>
-       <Icon>shopping_cart</Icon>{cant}
+       <h3>Cart</h3>
     </>
   );
 }

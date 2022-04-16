@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import Cart from './Cart.jsx';
+import CartWidget from './CartWidget.jsx';
 import LogoHeader from '../assets/img/logo-header.png';
 import { Link } from 'react-router-dom';
 
@@ -121,7 +121,7 @@ export default function NavBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Cart /> 
+            <CartWidget /> 
           </Box>
         </Toolbar>
       </Container>

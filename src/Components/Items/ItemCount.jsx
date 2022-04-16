@@ -4,14 +4,18 @@ import Button from '@mui/material/Button'
 
 export default function ItemCount({ stock, initial, onAdd }) {
 
-  let [numero, setNumero] = useState(stock > 0 ? initial : 0);
+  const [numero, setNumero] = useState(stock > 0 ? initial : 0);
 
   const restar = () => {
-      numero > initial ? setNumero(numero - 1) : setNumero(numero);
+      numero > initial && setNumero(numero - 1);
   }
 
   const aumentar = () => {
-      numero < stock ? setNumero(numero + 1) : setNumero(numero);
+      numero < stock && setNumero(numero + 1);
+  }
+
+  const handleClick = () => {
+      onAdd(numero)
   }
 
   return (
@@ -25,7 +29,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
         </Button>
         <br />
         <br />
-        <Button variant="contained" color="primary" onClick={() => onAdd(numero)}>Agregar al carro</Button>
+        <Button variant="contained" color="primary" onClick={handleClick}>Agregar al carro</Button>
     </Fragment>
   );
 }
