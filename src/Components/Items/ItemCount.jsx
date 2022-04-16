@@ -4,7 +4,7 @@ import Button from '@mui/material/Button'
 
 export default function ItemCount({ stock, initial, onAdd }) {
 
-  const [numero, setNumero] = useState(stock > 0 ? initial : 0);
+  const [numero, setNumero] = useState(stock === 0 ? 0 : initial);
 
   const restar = () => {
       numero > initial && setNumero(numero - 1);
