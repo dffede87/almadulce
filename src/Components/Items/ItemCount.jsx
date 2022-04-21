@@ -1,8 +1,10 @@
-import React, {useState, Fragment} from "react";
+import React, { useState, Fragment, useContext } from "react";
 import Button from '@mui/material/Button'
+import { CartContext } from "../CartContext";
 
+export default function ItemCount({ producto, stock, initial }) {
 
-export default function ItemCount({ stock, initial, onAdd }) {
+  const { addToCart } = useContext(CartContext)
 
   const [numero, setNumero] = useState(stock === 0 ? 0 : initial);
 
@@ -12,10 +14,6 @@ export default function ItemCount({ stock, initial, onAdd }) {
 
   const aumentar = () => {
       numero < stock && setNumero(numero + 1);
-  }
-
-  const handleClick = () => {
-      onAdd(numero)
   }
 
   return (
@@ -29,7 +27,15 @@ export default function ItemCount({ stock, initial, onAdd }) {
         </Button>
         <br />
         <br />
-        <Button variant="contained" color="primary" onClick={handleClick}>Agregar al carro</Button>
+        <Button variant="contained" color="primary" 
+          onClick={() => {
+            const subtotal = producto.precio * numero;
+            addToCart({ ...producto, numero, subtotal })
+            setNumero(stock === 0 ? 0 : initial)
+          }}
+        >
+          Agregar al carro
+        </Button>
     </Fragment>
   );
 }

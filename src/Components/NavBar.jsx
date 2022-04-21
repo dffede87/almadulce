@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,8 +12,11 @@ import MenuItem from '@mui/material/MenuItem';
 import CartWidget from './CartWidget.jsx';
 import LogoHeader from '../assets/img/logo-header.png';
 import { Link } from 'react-router-dom';
+import { CartContext } from './CartContext.jsx';
 
 export default function NavBar() {
+  const { cart } = useContext(CartContext)
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -121,7 +124,9 @@ export default function NavBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <CartWidget /> 
+            <Link to="/cart" style={{textDecoration: 'none'}}>
+              <CartWidget cant={cart.length} />
+            </Link>
           </Box>
         </Toolbar>
       </Container>

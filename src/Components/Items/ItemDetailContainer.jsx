@@ -17,7 +17,7 @@ export default function ItemDetailContainer({ titulo }) {
         .catch((error) => {
             console.log(error)
         })
-  }, [])
+  }, [id])
 
   return (
     <>
