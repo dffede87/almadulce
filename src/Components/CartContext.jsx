@@ -21,11 +21,11 @@ const CartContextProvider = ({ children }) => {
     setCart(cart.filter((producto) => producto.id !== id))
   }
 
-  const buyAll = () => setCart([])
+  const clearAll = () => setCart([])
 
   return (
     <>
-      <CartContext.Provider value={{ cart, addToCart, removeFromCart, buyAll }}>
+      <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearAll }}>
         {children}
       </CartContext.Provider>
     </>
