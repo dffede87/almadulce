@@ -125,7 +125,7 @@ export default function NavBar() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Link to="/cart" style={{textDecoration: 'none'}}>
-              <CartWidget cant={cart.length} />
+              <CartWidget cant={cart.map(item => item.numero).reduce((prev, curr) => prev + curr, 0)} />
             </Link>
           </Box>
         </Toolbar>

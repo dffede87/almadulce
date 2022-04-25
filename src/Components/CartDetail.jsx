@@ -11,11 +11,11 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button'
+import { AddCircle, Cancel, RemoveCircle } from '@mui/icons-material';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -75,12 +75,31 @@ export default function CartDetail() {
                                                         </Link>
                                                     </TableCell>
                                                     <TableCell align="right">$ {prod.precio}</TableCell>
-                                                    <TableCell align="right">{prod.numero} u.</TableCell>
+                                                    <TableCell align="right">
+                                                        <Tooltip title="Quitar unidad">
+                                                            <IconButton onClick={
+                                                                () => {
+                                                                    if(prod.numero !== 1){
+                                                                        prod.numero = prod.numero - 1
+                                                                        alert(prod.numero)
+                                                                    }
+                                                                }
+                                                            }>
+                                                                <RemoveCircle />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                        {prod.numero} u.
+                                                        <Tooltip title="Agregar unidad">
+                                                            <IconButton>
+                                                                <AddCircle />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                    </TableCell>
                                                     <TableCell align="right">$ {prod.subtotal}</TableCell>
                                                     <TableCell align="right">
                                                         <Tooltip title="Eliminar del carrito">
                                                             <IconButton onClick={() => removeFromCart(prod.id)}>
-                                                                <DeleteIcon />
+                                                                <Cancel />
                                                             </IconButton>
                                                         </Tooltip>
                                                     </TableCell>
