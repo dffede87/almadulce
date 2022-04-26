@@ -77,14 +77,7 @@ export default function CartDetail() {
                                                     <TableCell align="right">$ {prod.precio}</TableCell>
                                                     <TableCell align="right">
                                                         <Tooltip title="Quitar unidad">
-                                                            <IconButton onClick={
-                                                                () => {
-                                                                    if(prod.numero !== 1){
-                                                                        prod.numero = prod.numero - 1
-                                                                        alert(prod.numero)
-                                                                    }
-                                                                }
-                                                            }>
+                                                            <IconButton>
                                                                 <RemoveCircle />
                                                             </IconButton>
                                                         </Tooltip>
