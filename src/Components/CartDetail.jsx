@@ -27,7 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function CartDetail() {
 
-    const { cart, removeFromCart, clearAll } = useContext(CartContext)
+    const { cart, removeFromCart, clearAll, refreshCart, total } = useContext(CartContext)
 
     return (
         <>
@@ -77,13 +77,25 @@ export default function CartDetail() {
                                                     <TableCell align="right">$ {prod.precio}</TableCell>
                                                     <TableCell align="right">
                                                         <Tooltip title="Quitar unidad">
-                                                            <IconButton>
+                                                            <IconButton onClick={() => {
+                                                                if (prod.numero !== 1) {
+                                                                    prod.numero = prod.numero - 1
+                                                                    prod.subtotal = prod.precio * prod.numero
+                                                                    refreshCart()
+                                                                }
+                                                            }}>
                                                                 <RemoveCircle />
                                                             </IconButton>
                                                         </Tooltip>
                                                         {prod.numero} u.
                                                         <Tooltip title="Agregar unidad">
-                                                            <IconButton>
+                                                            <IconButton onClick={() => {
+                                                                if (prod.numero !== prod.stock) {
+                                                                    prod.numero = prod.numero + 1
+                                                                    prod.subtotal = prod.precio * prod.numero
+                                                                    refreshCart()
+                                                                }
+                                                            }}>
                                                                 <AddCircle />
                                                             </IconButton>
                                                         </Tooltip>
@@ -113,7 +125,7 @@ export default function CartDetail() {
                             <>
                                 <h2>Resumen del pedido</h2>
                                 <Item sx={{ marginTop: 2, marginBottom: 2 }}>
-                                    <h3>Total: $ {cart.map(item => item.subtotal).reduce((prev, curr) => prev + curr, 0)}</h3>
+                                    <h3>Total: $ {total}</h3>
                                     <Button variant="contained" color="primary">
                                         Finalizar compra
                                     </Button>

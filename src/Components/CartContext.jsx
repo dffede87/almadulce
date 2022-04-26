@@ -23,9 +23,15 @@ const CartContextProvider = ({ children }) => {
 
   const clearAll = () => setCart([])
 
+  const refreshCart = () => {
+    setCart([...cart])
+  }
+
+  let total = cart.map(item => item.subtotal).reduce((prev, curr) => prev + curr, 0)
+
   return (
     <>
-      <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearAll }}>
+      <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearAll, refreshCart, total }}>
         {children}
       </CartContext.Provider>
     </>
