@@ -10,6 +10,9 @@ const CartContextProvider = ({ children }) => {
     if (indexProd !== -1) {
       const newCart = [...cart]
       newCart[indexProd].numero = newCart[indexProd].numero + item.numero
+      if (newCart[indexProd].numero > newCart[indexProd].stock) {
+        newCart[indexProd].numero = newCart[indexProd].stock
+      }
       newCart[indexProd].subtotal = newCart[indexProd].subtotal + item.subtotal
       setCart(newCart)
     } else {

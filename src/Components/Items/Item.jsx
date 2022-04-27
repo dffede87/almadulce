@@ -23,7 +23,7 @@ export default function Item({id, nombre, precio, categoria, imagen}) {
             {nombre}
           </Typography>
           <Typography gutterBottom variant="body2" color="text.primary">
-            ${precio}
+            <strong>${precio}</strong>
           </Typography>
           <Typography variant="body2" color="text.secondary">
             #{categoria}

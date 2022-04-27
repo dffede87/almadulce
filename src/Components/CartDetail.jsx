@@ -58,29 +58,29 @@ export default function CartDetail() {
                                         <TableBody>
                                             {cart.length > 0 && cart.map(prod => (
                                                 <TableRow
-                                                    key={prod.nombre}
+                                                    key={prod.title}
                                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                                 >
                                                     <TableCell>
                                                         <Avatar
                                                             alt="Remy Sharp"
-                                                            src={prod.imagen}
+                                                            src={prod.imageId}
                                                             sx={{ width: 56, height: 56 }}
                                                             variant="rounded"
                                                         />
                                                     </TableCell>
                                                     <TableCell component="th" scope="row">
                                                         <Link to={`/item/${prod.id}`} style={{ textDecoration: 'none' }}>
-                                                            <strong>{prod.nombre}</strong>
+                                                            <strong>{prod.title}</strong>
                                                         </Link>
                                                     </TableCell>
-                                                    <TableCell align="right">$ {prod.precio}</TableCell>
+                                                    <TableCell align="right">$ {prod.price}</TableCell>
                                                     <TableCell align="right">
                                                         <Tooltip title="Quitar unidad">
                                                             <IconButton onClick={() => {
                                                                 if (prod.numero !== 1) {
                                                                     prod.numero = prod.numero - 1
-                                                                    prod.subtotal = prod.precio * prod.numero
+                                                                    prod.subtotal = prod.price * prod.numero
                                                                     refreshCart()
                                                                 }
                                                             }}>
@@ -92,7 +92,7 @@ export default function CartDetail() {
                                                             <IconButton onClick={() => {
                                                                 if (prod.numero !== prod.stock) {
                                                                     prod.numero = prod.numero + 1
-                                                                    prod.subtotal = prod.precio * prod.numero
+                                                                    prod.subtotal = prod.price * prod.numero
                                                                     refreshCart()
                                                                 }
                                                             }}>

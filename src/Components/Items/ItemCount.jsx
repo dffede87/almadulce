@@ -29,7 +29,7 @@ export default function ItemCount({ producto, stock, initial }) {
         <br />
         <Button variant="contained" color="primary" 
           onClick={() => {
-            const subtotal = producto.precio * numero;
+            const subtotal = producto.price * numero;
             addToCart({ ...producto, numero, subtotal })
             setNumero(stock === 0 ? 0 : initial)
           }}

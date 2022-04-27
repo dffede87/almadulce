@@ -83,7 +83,7 @@ export default function NavBar() {
                 </MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <Link to="category/pasteleria">Pastelería</Link>
+                    <Link to="category/dulces">Dulces</Link>
                   </Typography>
                 </MenuItem>
             </Menu>
@@ -113,12 +113,12 @@ export default function NavBar() {
                 Tortas
               </Button>
             </Link>
-            <Link to="/category/pasteleria" style={{textDecoration: 'none'}}>
+            <Link to="/category/dulces" style={{textDecoration: 'none'}}>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                Pastelería
+                Dulces
               </Button>
             </Link>    
           </Box>
