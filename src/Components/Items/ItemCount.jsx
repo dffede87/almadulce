@@ -34,7 +34,7 @@ export default function ItemCount({ producto, stock, initial }) {
             setNumero(stock === 0 ? 0 : initial)
           }}
         >
-          Agregar al carro
+          Añadir al carrito
         </Button>
     </Fragment>
   );

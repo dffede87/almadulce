@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { styled } from '@mui/material/styles';
-import { CartContext } from './CartContext'
+import { CartContext } from './CartContext';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -27,7 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function CartDetail() {
 
-    const { cart, removeFromCart, clearAll, refreshCart, total } = useContext(CartContext)
+    const { cart, removeFromCart, clearAll, refreshCart, total, createTicket } = useContext(CartContext)
 
     return (
         <>
@@ -126,9 +126,11 @@ export default function CartDetail() {
                                 <h2>Resumen del pedido</h2>
                                 <Item sx={{ marginTop: 2, marginBottom: 2 }}>
                                     <h3>Total: $ {total}</h3>
-                                    <Button variant="contained" color="primary">
-                                        Finalizar compra
-                                    </Button>
+                                    <Link onClick={createTicket} to={'/cart/ticket'} style={{textDecoration: 'none'}}>
+                                        <Button variant="contained" color="primary">
+                                            Finalizar compra
+                                        </Button>
+                                    </Link>
                                 </Item>
                             </>
                         }

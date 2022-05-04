@@ -4,6 +4,7 @@ export const CartContext = createContext()
 
 const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([])
+  const [pedido, setPedido] = useState([])
 
   const addToCart = (item) => {
     const indexProd = cart.findIndex((cartItem) => cartItem.id === item.id)
@@ -30,11 +31,17 @@ const CartContextProvider = ({ children }) => {
     setCart([...cart])
   }
 
+  const createTicket = () => {
+    cart.forEach(x => 
+      (setPedido([...pedido, { id: x.id, title: x.title, quantity: x.numero, price: x.subtotal }]))
+    )
+  }
+
   let total = cart.map(item => item.subtotal).reduce((prev, curr) => prev + curr, 0)
 
   return (
     <>
-      <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearAll, refreshCart, total }}>
+      <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearAll, refreshCart, createTicket, pedido, total }}>
         {children}
       </CartContext.Provider>
     </>
