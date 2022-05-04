@@ -32,7 +32,7 @@ const CartContextProvider = ({ children }) => {
   }
 
   const createTicket = () => {
-    cart.forEach(x => 
+    cart.map(x => 
       (setPedido([...pedido, { id: x.id, title: x.title, quantity: x.numero, price: x.subtotal }]))
     )
   }
