@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { styled } from '@mui/material/styles'
 import { CartContext } from './CartContext'
 import Box from '@mui/material/Box'
@@ -9,6 +10,11 @@ import FormHelperText from '@mui/material/FormHelperText'
 import Paper from '@mui/material/Paper'
 import { Button, FilledInput } from "@mui/material"
 import { addDoc, collection, getFirestore } from "firebase/firestore"
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -20,13 +26,27 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function BuyerTicket() {
 
-    const { cart, total, pedido } = useContext(CartContext)
+    const { cart, total, clearAll } = useContext(CartContext)
 
     const [nombre, setNombre] = useState('')
     const [apellidos, setApellidos] = useState('')
     const [tel, setTel] = useState('')
     const [email, setEmail] = useState('')
     const [orderId, setOrderId] = useState('')
+    const [open, setOpen] = React.useState(false)
+    const [scroll, setScroll] = React.useState('')
+
+    let navigate = useNavigate()
+
+    const handleClickOpen = () => {
+        setOpen(true)
+        setScroll('paper')
+    }
+
+    const handleClose = () => {
+        setOpen(false)
+        navigate('/')
+    }
 
     const sendOrder = () => {
         const showDate = new Date()
@@ -35,7 +55,7 @@ export default function BuyerTicket() {
 
         const order = {
             buyer: { name: nombre, lastName: apellidos, phone: tel, email: email },
-            items: pedido,
+            items: [...cart.map(x => ({ id: x.id, title: x.title, quantity: x.numero, price: x.price }))],
             date: todaysDate,
             total: total
         }
@@ -44,7 +64,21 @@ export default function BuyerTicket() {
         const ordersCollection = collection(db, "ordenes")
 
         addDoc(ordersCollection, order).then(({ id }) => setOrderId(id))
+
+        clearAll()
+
+        handleClickOpen()
     }
+
+    const descriptionElementRef = React.useRef(null);
+    React.useEffect(() => {
+        if (open) {
+            const { current: descriptionElement } = descriptionElementRef;
+            if (descriptionElement !== null) {
+                descriptionElement.focus();
+            }
+        }
+    }, [open]);
 
     return (
         <>
@@ -79,6 +113,13 @@ export default function BuyerTicket() {
                                     <FormHelperText id="email-helper">Nunca compartiremos tu Email.</FormHelperText>
                                 </FormControl>
                             </div>
+                            <div>
+                                <FormControl fullWidth sx={{ m: 1 }} variant="filled">
+                                    <InputLabel htmlFor="repeatEmail">Repetir Email</InputLabel>
+                                    <FilledInput id="repeatEmail" aria-describedby="repeatEmail-helper" />
+                                    <FormHelperText id="repeatEmail-helper">Nunca compartiremos tu Email.</FormHelperText>
+                                </FormControl>
+                            </div>
                         </Item>
                     </Grid>
                     <Grid item xs={6} md={4}>
@@ -91,13 +132,34 @@ export default function BuyerTicket() {
                                 ))}
                                 <h3>Total: $ {total}</h3>
                                 <Button variant="contained" color="primary" onClick={sendOrder}>
-                                    Finalizar compra
+                                    Enviar orden
                                 </Button>
                             </Item>
                         }
                     </Grid>
                 </Grid>
             </Box>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                scroll={scroll}
+                aria-labelledby="scroll-dialog-title"
+                aria-describedby="scroll-dialog-description"
+            >
+                <DialogTitle id="scroll-dialog-title">¡Pedido realizado con éxito!</DialogTitle>
+                <DialogContent dividers={scroll === 'paper'}>
+                    <DialogContentText
+                        id="scroll-dialog-description"
+                        ref={descriptionElementRef}
+                        tabIndex={-1}
+                    >
+                        Nro. de orden: <strong>{ orderId }</strong>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cerrar</Button>
+                </DialogActions>
+            </Dialog>
         </>
     );
 }

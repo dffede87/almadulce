@@ -10,7 +10,7 @@ export default function Item({id, nombre, precio, categoria, imagen}) {
 
   return (
     <>
-    <Card key={id} sx={{ maxWidth: 345 }}>
+    <Card key={id} sx={{ maxWidth: 345, margin: 3 }}>
       <CardActionArea>
         <CardMedia
           component="img"

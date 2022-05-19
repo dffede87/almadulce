@@ -1,4 +1,9 @@
 .containerItems {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.items {
+    margin: 10px;
 }
